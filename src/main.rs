@@ -1,16 +1,16 @@
+
 fn main() {
-    let imgx = 800;
-    let imgy = 800;
+ render();
+}
 
-    // Create a new ImgBuf with width: imgx and height: imgy
-    let mut imgbuf = image::ImageBuffer::new(imgx, imgy);
+fn render() {
+    let width = 800;
+    let height = 800;
+    let mut imgbuf = image::ImageBuffer::new(width, height);
 
-    // Iterate over the coordinates and pixels of the image
-    for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
-        let r = (0.3 * x as f32) as u8;
-        let b = (0.3 * y as f32) as u8;
-        *pixel = image::Rgb([r, 0, b]);
+    for (_, _, pixel) in imgbuf.enumerate_pixels_mut() {
+        *pixel = image::Rgb([255 as u8, 255 as u8, 255 as u8]);
     }
 
-    imgbuf.save("fractal.png").unwrap();
+    imgbuf.save("output.png").unwrap();
 }
