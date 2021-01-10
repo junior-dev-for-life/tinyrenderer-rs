@@ -8,12 +8,6 @@ pub struct Obj {
     pub faces: Vec<Vec<i32>>
 }
 
-pub struct Vec3 {
-    pub x: f32,
-    pub y: f32,
-    pub z: f32
-}
-
 pub fn read_obj(filename: &str) -> Result<Obj, io::Error> {
     let f = File::open(filename)?;
     let file = BufReader::new(&f);
