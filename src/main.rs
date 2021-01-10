@@ -1,3 +1,5 @@
+mod obj_reader;
+
 #[derive(Clone)]
 struct Pixel {
     x: u32,
@@ -5,13 +7,14 @@ struct Pixel {
 }
 
 fn main() {
-    let points_1 = dda_algorithm(0 , 0, 80, 50);
+    let obj = obj_reader::read_obj("./obj-files/african-head.obj").unwrap();
 
-    // let concatenated = [&points_1[..], &points_2[..], &points_3[..]].concat();
-
-    render(points_1);
+    for i in obj.verts {
+        println!("{}", i);
+    }
 }
 
+#[allow(dead_code)]
 fn dda_algorithm(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
     let x_dist = x2 - x1;
     let y_dist = y2 - y1;
@@ -24,7 +27,7 @@ fn dda_algorithm(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
     let mut points: Vec<Pixel> = vec![];
     points.push(Pixel { x: x as u32,  y: y as u32 });
 
-    for i in 1..=steps {
+    for _i in 1..=steps {
         x += x_increment;
         y += y_increment;
         points.push(Pixel{ x: x as u32, y: y as u32 });
@@ -33,6 +36,7 @@ fn dda_algorithm(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
     return points;
 }
 
+#[allow(dead_code)]
 fn render(points: Vec<Pixel>) {
     let width = 100;
     let height = 100;
