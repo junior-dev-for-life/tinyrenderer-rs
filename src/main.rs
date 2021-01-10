@@ -1,10 +1,7 @@
 mod obj_reader;
+mod render;
 
-#[derive(Clone)]
-struct Pixel {
-    x: u32,
-    y: u32
-}
+use render::{ render_to_file, Pixel };
 
 const WIDTH: u32 = 500;
 const HEIGHT: u32 = 500;
@@ -37,7 +34,7 @@ fn main() {
         }
     }
 
-    render(points);
+    render::render_to_file(points, WIDTH, HEIGHT, "output.png");
 }
 
 #[allow(dead_code)]
@@ -60,20 +57,4 @@ fn dda_algorithm(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
     }
 
     return points;
-}
-
-#[allow(dead_code)]
-fn render(points: Vec<Pixel>) {
-    let mut imgbuf = image::ImageBuffer::new(WIDTH, HEIGHT);
-
-    for (_, _, pixel) in imgbuf.enumerate_pixels_mut() {
-        *pixel = image::Rgb([0 as u8, 0 as u8, 0 as u8]);
-    }
-
-    for point in points.iter() {
-        imgbuf.put_pixel(point.x, point.y, image::Rgb([255 as u8, 255 as u8, 255 as u8]));
-    }
-
-    image::imageops::flip_vertical_in_place(&mut imgbuf);
-    imgbuf.save("output_dda_reverse.png").unwrap();
 }
