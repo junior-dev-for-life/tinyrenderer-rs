@@ -1,23 +1,26 @@
+#[derive(Clone)]
 struct Pixel {
     x: u32,
     y: u32
 }
 
 fn main() {
-    let dda_points = dda_algorithm(90 , 80, 60, 50);
+    let points_1 = dda_algorithm(0 , 0, 80, 50);
 
-    render(dda_points);
+    // let concatenated = [&points_1[..], &points_2[..], &points_3[..]].concat();
+
+    render(points_1);
 }
 
 fn dda_algorithm(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
     let x_dist = x2 - x1;
     let y_dist = y2 - y1;
     let steps = if x_dist.abs() > y_dist.abs() { x_dist.abs() } else { y_dist.abs() };
-    let x_increment = x_dist / steps;
-    let y_increment = y_dist / steps;
+    let x_increment = x_dist as f32 / steps as f32;
+    let y_increment = y_dist as f32 / steps as f32;
 
-    let mut x = x1;
-    let mut y = y1;
+    let mut x = x1 as f32;
+    let mut y = y1 as f32;
     let mut points: Vec<Pixel> = vec![];
     points.push(Pixel { x: x as u32,  y: y as u32 });
 
