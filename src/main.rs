@@ -3,7 +3,7 @@ mod render;
 mod line;
 
 use render::{ render_to_file, Pixel };
-use line::{ dda_algorithm };
+use line::{ dda_algorithm, line_bresenham };
 
 const WIDTH: u32 = 500;
 const HEIGHT: u32 = 500;
@@ -29,12 +29,12 @@ fn main() {
             let x1 = ((v1[0] + 1.) * width / 2.) as i32;
             let y1 = ((v1[1] + 1.) * height / 2.) as i32;
 
-            let line = dda_algorithm(x0, y0, x1, y1);
+            let line = line_bresenham(x0, y0, x1, y1);
             for pixel in line.iter() {
                 points.push(pixel.clone());
             }
         }
     }
 
-    render_to_file(points, WIDTH, HEIGHT, "output.png");
+    render_to_file(points, WIDTH, HEIGHT, "output_bresenham.png");
 }
