@@ -71,6 +71,18 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_dda() {
+        let points = dda_algorithm(0, 0, 5, 2);
+        assert_eq!(points.len(), 6);
+        assert_eq!(points[0], Pixel { x: 0, y: 0 });
+        assert_eq!(points[1], Pixel { x: 1, y: 0 });
+        assert_eq!(points[2], Pixel { x: 2, y: 0 });
+        assert_eq!(points[3], Pixel { x: 3, y: 1 });
+        assert_eq!(points[4], Pixel { x: 4, y: 1 });
+        assert_eq!(points[5], Pixel { x: 5, y: 2 });
+    }
+
+    #[test]
     fn test_line_bresenham() {
         let points = line_bresenham(0, 0, 5, 2);
         assert_eq!(points.len(), 6);
