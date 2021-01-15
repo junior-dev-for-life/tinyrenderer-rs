@@ -65,3 +65,20 @@ pub fn line_bresenham(x1: i32, y1: i32, x2: i32, y2: i32) -> Vec<Pixel> {
 
     return points;
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_line_bresenham() {
+        let points = line_bresenham(0, 0, 5, 2);
+        assert_eq!(points.len(), 6);
+        assert_eq!(points[0], Pixel { x: 0, y: 0 });
+        assert_eq!(points[1], Pixel { x: 1, y: 0 });
+        assert_eq!(points[2], Pixel { x: 2, y: 1 });
+        assert_eq!(points[3], Pixel { x: 3, y: 1 });
+        assert_eq!(points[4], Pixel { x: 4, y: 2 });
+        assert_eq!(points[5], Pixel { x: 5, y: 2 });
+    }
+}

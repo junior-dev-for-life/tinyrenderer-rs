@@ -1,4 +1,4 @@
-#[derive(Clone)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Pixel {
     pub x: u32,
     pub y: u32
